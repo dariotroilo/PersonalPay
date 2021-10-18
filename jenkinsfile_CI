@@ -1,0 +1,44 @@
+pipeline {
+			environment { 
+				registry = "dariotroilo/personalpay" 
+				registryCredential = 'docker' 
+				dockerImage = '' 
+			}
+
+			agent any
+
+			stages {
+					stage('Building Proyect') {
+						steps {
+								git branch: 'main', url: 'https://github.com/dariotroilo/spring-petclinic.git'
+								sh "mvn clean package -DskipTests=true -f pom.xml"
+							  }
+					}
+
+					stage('Testing') {
+						steps {
+								sh "mvn test -f pom.xml"
+							  }
+					}
+
+					stage('Building image') { 
+						steps { 
+								script { 
+										dockerImage = docker.build registry + ":latest" 
+									   }
+							  } 
+					}
+
+					stage('Deploy image') { 
+						steps { 
+								script { 
+										docker.withRegistry( '', registryCredential ) { 
+											dockerImage.push() 
+										}
+								} 
+						}
+					} 
+
+
+			}
+}
