@@ -1,11 +1,14 @@
 1- Este proyecto lo tenia del curso de Devops que estoy realizando y me pareció interesante para presentarlo, ademas que tenia el test incluido en el proyecto.
+
 2- Herramientas utilizadas:
    - Github
    - VS Code
    - Dockerhub
    - jenkins
    - k3d
+
 4- ver archivo punto4.md
+
 9- Pipelines adjuntados con este documento
    El Dockerfile esta en el proyecto que utilicé, esta modificado para mi proyecto y subido a mi github.
    Con respecto a las dudas e inconvenientes...
