@@ -1,0 +1,22 @@
+pipeline {
+        agent any
+        
+        stages {
+
+                    stage('Getting Proyect') {
+						steps {
+								git branch: 'main', url: 'https://github.com/dariotroilo/personal_CD.git'
+							  }
+					}
+                    					
+                    stage ('K8S Deploy') {
+                        steps {
+                                kubernetesDeploy(
+                                configs: 'deploy-aws.yaml',
+                                kubeconfigId: 'k8s',
+                                enableConfigSubstitution: true
+                                )               
+                        }
+                    }
+        }
+}
